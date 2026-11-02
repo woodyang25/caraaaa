@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#171027">
+<title>Caraaaaaa ♡ Our Little Universe</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:#fff;font-family:Georgia,serif;background:radial-gradient(ellipse at 20% 10%,#50345f,transparent 38%),radial-gradient(ellipse at 85% 35%,#40234f,transparent 36%),linear-gradient(145deg,#100c1b,#24152f 60%,#100d20)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 12% 18%,white 99%,transparent),radial-gradient(2px 2px at 72% 22%,#f8d9ff 99%,transparent),radial-gradient(1px 1px at 43% 75%,white 99%,transparent),radial-gradient(1px 1px at 90% 82%,white 99%,transparent);background-size:230px 210px;opacity:.6;animation:twinkle 5s infinite alternate}
+@keyframes twinkle{to{opacity:.2}}
+main{width:min(850px,92%);margin:auto;padding:35px 0 60px;position:relative}
+.hero{text-align:center;padding:48px 10px 35px}.moon{font-size:48px;text-shadow:0 0 25px #ffd5ff}
+.eyebrow{font:11px Arial;letter-spacing:.28em;text-transform:uppercase;color:#ddc8ff}
+h1{font-size:clamp(45px,10vw,82px);font-weight:normal;color:#ffe0f2;margin:14px 0;text-shadow:0 0 25px #e7a9df66}
+.sub{color:#e4d6ef;font-size:18px}
+.panel{margin:18px 0;padding:25px;border:1px solid #ffffff25;border-radius:23px;background:#ffffff0c;backdrop-filter:blur(8px);box-shadow:0 15px 45px #0002}
+h2{text-align:center;color:#ffc8e8;font-weight:normal;font-size:26px;margin:0 0 18px}
+.counter{text-align:center}.days{font-size:clamp(55px,12vw,82px);color:#ffe1f4}
+.small{font:12px Arial;letter-spacing:.16em;color:#cdbbdc;text-transform:uppercase}.date{color:#d9c8e8;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.tile{text-align:center;padding:20px;border-radius:16px;background:#ffffff0c}
+.tile b{display:block;color:#ffc8e8;font-size:23px;font-weight:normal;margin-bottom:7px}
+.tile span{font:13px Arial;color:#cdbbdc}
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.photo{aspect-ratio:1;border:1px dashed #d9c4ff88;border-radius:15px;display:grid;place-items:center;overflow:hidden;color:#d3c2e0;font:12px Arial;cursor:pointer;background:#ffffff08}
+.photo img{width:100%;height:100%;object-fit:cover}input{display:none}
+button{border:1px solid #e9bde8aa;background:#ffffff12;color:white;border-radius:99px;padding:12px 20px;cursor:pointer;font:14px Arial}
+button:hover{background:#ffffff28}.center{text-align:center}
+#letter{display:none;max-width:540px;margin:18px auto 0;line-height:1.8;color:#f4e8f4}
+#letter.show{display:block}footer{text-align:center;color:#c5b2d2;font:12px Arial;padding:28px}.heart{color:#ffb9df}
+@media(max-width:560px){.photos{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.panel{padding:20px}}
+</style>
+</head>
+<body><main>
+<header class="hero">
+<div class="moon">☾</div><div class="eyebrow">a little place in the universe</div>
+<h1>Caraaaaaa <span class="heart">♡</span></h1><div class="sub">Our Little Universe</div>
+<p class="date">Since October 10, 2026</p>
+</header>
+<section class="panel counter">
+<h2>Every day with you</h2><div class="days" id="days">0</div>
+<div class="small">days together</div><div class="date">October 10, 2026</div>
+</section>
+<section class="panel"><h2>Our little moments ✧</h2>
+<div class="grid"><div class="tile"><b>♡</b><span>My favorite person</span></div>
+<div class="tile"><b>∞</b><span>More memories to come</span></div></div>
+</section>
+<section class="panel"><h2>Our memories 📷</h2>
+<p class="center" style="font:13px Arial;color:#cdbbdc">Choose a square to add a photo from this device.</p>
+<div class="photos">
+<label class="photo">＋ Add a photo<input type="file" accept="image/*"></label>
+<label class="photo">＋ Add a photo<input type="file" accept="image/*"></label>
+<label class="photo">＋ Add a photo<input type="file" accept="image/*"></label>
+</div></section>
+<section class="panel center"><h2>A little letter 💌</h2>
+<button id="toggle">Open your letter</button>
+<div id="letter">Even the simplest days become special when I get to share them with you.
+Thank you for being part of my story. Here's to all the little moments, the big laughs,
+and the memories we haven't made yet.<br><br>
+<span class="heart">You make my universe brighter. ♡</span></div>
+</section>
+<footer>Made with love <span class="heart">♡</span> just for Caraaaaaa</footer>
+</main>
+<script>
+const start=new Date(2026,9,10),now=new Date();now.setHours(0,0,0,0);
+document.getElementById('days').textContent=Math.max(0,Math.floor((now-start)/86400000));
+document.getElementById('toggle').onclick=()=>{
+ const l=document.getElementById('letter');l.classList.toggle('show');
+ document.getElementById('toggle').textContent=l.classList.contains('show')?'Close letter':'Open your letter';
+};
+document.querySelectorAll('.photo input').forEach(i=>i.onchange=()=>{
+ const f=i.files[0];if(!f)return;const r=new FileReader();
+ r.onload=e=>{const box=i.parentElement;box.innerHTML='';const img=new Image();img.src=e.target.result;img.alt='Our memory';box.appendChild(img)};
+ r.readAsDataURL(f);
+});
+</script>
+</body></html>
